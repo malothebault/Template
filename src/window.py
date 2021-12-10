@@ -36,6 +36,9 @@ class Window(Gtk.Window):
             self, 
             title=cn.App.application_name
         )
+        
+        context = self.get_style_context()
+        context.add_class ("rounded")
 
         '''Here we are creating a new instance of Headerbar 
         and setting as the titlebar'''

@@ -32,6 +32,24 @@ from gi.repository import Gtk, Granite
 
 import constants as cn
 
+########### TRANSLATION ##############
+try:
+    current_locale, encoding = locale.getdefaultlocale()
+    locale_path = os.path.join(
+        os.path.abspath(
+            os.path.dirname(__file__)
+        ),
+        'locale'
+    )
+    translate = gettext.translation(
+        cn.App.application_shortname,
+        locale_path,
+        [current_locale]
+    )
+    _ = translate.gettext
+except FileNotFoundError:
+    _ = str
+
 class Welcome(Gtk.Box):
 
     '''Getting system default settings'''
@@ -42,24 +60,6 @@ class Welcome(Gtk.Box):
         new Welcome Widget.'''
         Gtk.Box.__init__(self, False, 0)
         self.parent = parent
-
-        ########### TRANSLATION ##############
-        try:
-            current_locale, encoding = locale.getdefaultlocale()
-            locale_path = os.path.join(
-                os.path.abspath(
-                    os.path.dirname(__file__)
-                ),
-                'locale'
-            )
-            translate = gettext.translation(
-                cn.App.application_shortname,
-                locale_path,
-                [current_locale]
-            )
-            _ = translate.gettext
-        except FileNotFoundError:
-            _ = str
         self._ = _
         ######################################
 
@@ -72,14 +72,14 @@ class Welcome(Gtk.Box):
 
         '''Let's populate the Welcome menu actions.'''
         welcome.append(
-            "document-new", # the action icon (a valid icon name)
-            _('New tournament'), # the action name
-            _('Open a new tournament window') # the action description
+            "document-open", # the action icon (a valid icon name)
+            _('Open a .gpx file'), # the action name
+            _('Visualize the metrics of your adventure') # the action description
         )
         welcome.append(
-            "document-open-recent",
-            _('Open recent tournament'),
-            _('Open a recent Tournament session from file')
+            "document-new",
+            _('Create a .gpx file'),
+            _('Plan your next adventure !')
         )
 
         '''Here we are connecting the on_welcome_activated method to the
@@ -101,7 +101,24 @@ class Welcome(Gtk.Box):
         self.parent.parent.hbar.hbar_print.set_sensitive(True)
         if index == 0:
             # New Tournament
-            self.parent.stack.set_visible_child_name("initialisation")
+            dialog = Gtk.FileChooserNative.new(_("Please choose a file"),
+                                               self.parent.parent,
+                                               Gtk.FileChooserAction.OPEN,
+                                               _("Open"),
+                                               _("Cancel"))
+            response = dialog.run()
+            print(response)
+            if response == Gtk.ResponseType.ACCEPT:
+                print("Open clicked")
+                print("File selected: " + dialog.get_filename())
+                self.parent.main_file["name"] = dialog.get_filename()[::-1].split("/", 1)[0][::-1]
+                self.parent.main_file["path"] = dialog.get_filename()
+                print(f"{name} is located at {path}")
+                self.parent.stack.set_visible_child_name("initialisation")
+            dialog.destroy() 
+            #self.main_file_selection
+            #self.parent.stack.set_visible_child_name("initialisation")
         else:
             # Open Recent
             self.parent.stack.set_visible_child_name("brackets")
+         
