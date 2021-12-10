@@ -20,6 +20,29 @@
 
 import gi
 import webbrowser
+import os
+import locale
+import gettext
+import constants as cn
+
+########### TRANSLATION ##############
+try:
+    current_locale, encoding = locale.getdefaultlocale()
+    locale_path = os.path.join(
+        os.path.abspath(
+            os.path.dirname(__file__)
+        ),
+        'locale'
+    )
+    translate = gettext.translation(
+        cn.App.application_shortname,
+        locale_path,
+        [current_locale]
+    )
+    _ = translate.gettext
+except FileNotFoundError:
+    _ = str
+######################################
 
 gi.require_version('Gtk', '3.0')
 
@@ -36,6 +59,7 @@ class Headerbar(Gtk.HeaderBar):
 
         Gtk.HeaderBar.__init__(self)
         self.parent = parent
+        self._ = _
 
         '''Here we are setting some parameters for the HeaderBar
         <https://developer.gnome.org/gtk3/stable/GtkHeaderBar.html>'''
@@ -81,19 +105,6 @@ class Headerbar(Gtk.HeaderBar):
             self.hbar_save_file
         )
         
-        '''PRINT DOCUMENT BUTTON'''
-        self.hbar_print = Gtk.ToolButton() # a new instance
-        self.hbar_print.set_icon_name( # setting the button icon name
-            "document-print" 
-        ) 
-        self.hbar_print.connect( # connecting our method to the clicked signal
-            "clicked", 
-            self.on_hbar_print_clicked
-        )
-        self.pack_start( # packing the button to the start of the HeaderBar
-            self.hbar_print
-        )
-        
         '''Another button, this can be used for choosing Application colors'''
         # self.hbar_color = Gtk.ColorButton.new_with_rgba(
         #     Gdk.RGBA(222, 222, 222, 255)
@@ -118,12 +129,22 @@ class Headerbar(Gtk.HeaderBar):
         self.parent.stack.set_visible_child_name("initialisation")
         
     def on_hbar_open_file_clicked(self, widget):
-        self.parent.stack.set_visible_child_name("brackets")
+        dialog = Gtk.FileChooserNative.new("Please choose a file",
+                                            self.parent,
+                                            Gtk.FileChooserAction.OPEN,
+                                            "Open",
+                                            "Cancel")
+        response = dialog.run()
+        print(response)
+        if response == Gtk.ResponseType.ACCEPT:
+            print("Open clicked")
+            print("File selected: " + dialog.get_filename())
+            self.parent.main_file["name"] = dialog.get_filename()[::-1].split("/", 1)[0][::-1]
+            self.parent.main_file["path"] = dialog.get_filename()
+            self.parent.stack.set_visible_child_name("initialisation")
+        dialog.destroy() 
     
     def on_hbar_save_file_clicked(self, widget):
-        None
-    
-    def on_hbar_print_clicked(self, widget):
         None
 
     # def on_hbar_color_color_set(self, widget):

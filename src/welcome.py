@@ -88,7 +88,6 @@ class Welcome(Gtk.Box):
         welcome.connect("activated", self.on_welcome_activated)
 
         self.parent.parent.hbar.hbar_save_file.set_sensitive(False)
-        self.parent.parent.hbar.hbar_print.set_sensitive(False)
 
         '''Do you remember the Box we were talking about at the beginning?
         Here, we add the Welcome Widget to this.'''
@@ -98,7 +97,6 @@ class Welcome(Gtk.Box):
         '''The activated signal return an index with the activated item, we
         will use this to perform different actions'''
         self.parent.parent.hbar.hbar_save_file.set_sensitive(True)
-        self.parent.parent.hbar.hbar_print.set_sensitive(True)
         if index == 0:
             # New Tournament
             dialog = Gtk.FileChooserNative.new(_("Please choose a file"),
@@ -113,7 +111,6 @@ class Welcome(Gtk.Box):
                 print("File selected: " + dialog.get_filename())
                 self.parent.main_file["name"] = dialog.get_filename()[::-1].split("/", 1)[0][::-1]
                 self.parent.main_file["path"] = dialog.get_filename()
-                print(f"{name} is located at {path}")
                 self.parent.stack.set_visible_child_name("initialisation")
             dialog.destroy() 
             #self.main_file_selection

@@ -20,7 +20,7 @@
 import gi
 
 gi.require_version('Gtk', '3.0')
-gi.require_version('Granite', '1.0')
+# gi.require_version('Granite', '1.0')
 
 from gi.repository import Gtk
 
@@ -36,6 +36,8 @@ class Window(Gtk.Window):
             self, 
             title=cn.App.application_name
         )
+        
+        self.main_file = {"name": "", "path": ""}
         
         context = self.get_style_context()
         context.add_class ("rounded")

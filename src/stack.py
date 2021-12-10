@@ -34,10 +34,10 @@ class Stack(Gtk.Box):
         
         self.welcome = wl.Welcome(self)
         self.initialisation = it.Initialisation(self)
-        # self.brackets = bk.Brackets(self)
+        self.brackets = bk.Brackets(self)
 
         self.stack.add_titled(self.welcome, "welcome", "Welcome")
         self.stack.add_titled(self.initialisation, "initialisation", "Initialisation")
-        # self.stack.add_titled(self.brackets, "brackets", "Brackets")
+        self.stack.add_titled(self.brackets, "brackets", "Brackets")
 
         self.pack_start(self.stack, True, True, 0)

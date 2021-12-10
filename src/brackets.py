@@ -10,32 +10,32 @@ import webbrowser
 
 gi.require_version('Gtk', '3.0')
 gi.require_version('Granite', '1.0')
+gi.require_version('OsmGpsMap', '1.0')
 
-from gi.repository import Gtk, Granite
+from gi.repository import Gtk, Granite, GObject
+from gi.repository import OsmGpsMap as osm
+
+print(f"using library: {osm.__file__} (version {osm._version})")
 
 try:
     import constants as cn
     import teams as tm
     import handler as hd
 except ImportError:
-    import tournoi.constants as cn
-    import tournoi.teams as tm
-    import tournoi.handler as hd
+    import escapade.constants as cn
+    import escapade.teams as tm
+    import escapade.handler as hd
 
 class Brackets(Gtk.Box):
 
     '''Getting system default settings'''
     settings = Gtk.Settings.get_default()
 
-    def __init__(self, parent, init_list):
+    def __init__(self, parent):
         '''Our class will be a Gtk.Box and will contain our 
         new Welcome Widget.'''
         Gtk.Box.__init__(self, False, 0)
         self.parent = parent
-        self.init_list = init_list
-        # print(self.init_list)
-        icon_size = Gtk.IconSize.MENU
-
         ########### TRANSLATION ##############
         try:
             current_locale, encoding = locale.getdefaultlocale()
@@ -54,25 +54,31 @@ class Brackets(Gtk.Box):
         except FileNotFoundError:
             _ = str
         self._ = _
-        ######################################
-        
-        self.set_border_width(80)
-        self.set_orientation(Gtk.Orientation.VERTICAL)
-        
-        brackets = Gtk.Grid.new()
-        brackets.set_column_homogeneous(True)
-        brackets.set_row_homogeneous(True)
-        brackets.set_row_spacing(35)
-        brackets.set_column_spacing(35)
-        
-        WIDTH = 1
-        HEIGHT = 1
-        if self.init_list != []:
-            handler = hd.Handler(self, self.init_list)  ## A ajouter
-            handler_list = handler.list_to_return
-            for team in handler_list:
-                brackets.attach(team.box,team.coordinate[0],team.coordinate[1],WIDTH,HEIGHT)
-                
-        self.pack_start(brackets, True, True, 0)
-        
+        ######################################     
 
+        # https://github.com/nzjrs/osm-gps-map/blob/master/examples/mapviewer.py
+        m = osm.Map()
+        m.layer_add(
+            osm.MapOsd(show_dpad=True,
+                       show_zoom=True,
+                       show_crosshair=True)
+        )
+        m.set_property("map-source", osm.MapSource_t.OPENSTREETMAP)
+        m.layer_add(self.DummyLayer())
+        self.add(m)
+        
+    class DummyLayer(GObject.GObject, osm.MapLayer):
+        def __init__(self):
+            GObject.GObject.__init__(self)
+
+        def do_draw(self, gpsmap, gdkdrawable):
+            pass
+
+        def do_render(self, gpsmap):
+            pass
+
+        def do_busy(self):
+            return False
+
+        def do_button_press(self, gpsmap, gdkeventbutton):
+            return False
