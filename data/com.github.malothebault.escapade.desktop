@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Escapade
+GenericName=Escapade
+Comment=Open and create GPX files. Plan your future adventure.
+Categories=Accessories;
+Exec=com.github.malothebault.escapade
+Icon=com.github.malothebault.escapade
+Terminal=false
+Type=Application
+X-GNOME-Gettext-Domain=com.github.malothebault.escapade
+Keywords=Python;

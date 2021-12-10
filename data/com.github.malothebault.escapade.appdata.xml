@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2017 Allen B -->
+<component type="desktop">
+  <id>com.github.malothebault.escapade</id>
+  <metadata_license>CC0</metadata_license>
+  <project_license>GPL-3.0+</project_license>
+  <name>Escapade</name>
+  <summary>Open and create GPX files. Plan your future adventure.</summary>
+  <developer_name>Malo Thebault</developer_name>
+  <screenshots>
+      <screenshot type="default">
+          <image>https://raw.githubusercontent.com/mirkobrombin/elementarypython/master/screenshot.png</image>
+      </screenshot>
+  </screenshots>
+  <description>
+    <p>Open and create GPX files. Plan your future adventure.</p>
+  </description>
+  <url type="homepage">https://github.com/malothebault/escapade</url>
+  <url type="bugtracker">https://github.com/malothebault/escapade/issues/labels/bug</url>
+  <url type="help">https://github.com/malothebault/escapade/issues</url>
+  <custom>
+     <value key="x-appcenter-color-primary">#E3D59E</value>
+     <value key="x-appcenter-color-primary-text">#270F2B</value>
+  </custom>
+</component>
