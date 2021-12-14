@@ -134,3 +134,29 @@ class Brackets(Gtk.Box):
         b.connect("motion_notify_event", self.motion_notify_event)
         b.show()
         return b
+    
+    
+# import fitz
+
+# src_pdf_filename = 'source.pdf'
+# dst_pdf_filename = 'destination.pdf'
+# img_filename = 'barcode.jpg'
+
+# # http://pymupdf.readthedocs.io/en/latest/rect/
+# # Set position and size according to your needs
+# img_rect = fitz.Rect(100, 100, 120, 120)
+
+# document = fitz.open(src_pdf_filename)
+
+# # We'll put image on first page only but you could put it elsewhere
+# page = document[0]
+# page.insertImage(img_rect, filename=img_filename)
+
+# # See http://pymupdf.readthedocs.io/en/latest/document/#Document.save and
+# # http://pymupdf.readthedocs.io/en/latest/document/#Document.saveIncr for
+# # additional parameters, especially if you want to overwrite existing PDF
+# # instead of writing new PDF
+# document.save(dst_pdf_filename)
+
+# document.close()
+
