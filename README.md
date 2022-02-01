@@ -11,15 +11,16 @@ This is highly inspired by [ElementaryPython](https://github.com/mirkobrombin/El
 - libgranite-dev 
 
 ## 🔧 Installation
+On the top right corner of this page, click on the 'Use this template' button, then:
 ```bash
-git clone https://github.com/malothebault/Template.git
-cd Template
+git clone https://github.com/<your_username>/<repo_name>.git
+cd <repo_name>
 sudo python3 setup.py install
 ```
 
 ## 🔧 How to run
 ```bash
-com.github.malothebault.template
+com.github.<your_username>.template
 ```
 
 ## 🔧 If the schema is not found
