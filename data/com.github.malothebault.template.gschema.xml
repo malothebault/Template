@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist>
-	<schema path="/com/github/malothebault/escapade/" id="com.github.malothebault.escapade" gettext-domain="escapade">
+	<schema path="/com/github/malothebault/template/" id="com.github.malothebault.template" gettext-domain="template">
 		<key name="pos-x" type="i">
 			<default>360</default>
 			<summary>Horizontal position</summary>

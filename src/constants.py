@@ -36,7 +36,7 @@ try:
         'locale'
     )
     translate = gettext.translation(
-        "escapade", 
+        "template", 
         locale_path, 
         [current_locale] 
     )
@@ -47,16 +47,16 @@ except FileNotFoundError:
 class App:
     '''Here we are defining our Application infos, so we can easily
     use in all our application files'''
-    application_shortname = "escapade"
-    application_id = "com.github.malothebault.escapade"
-    application_name = "Escapade"
-    application_description = _('Open and create GPX files. Plan your future adventure.')
+    application_shortname = "template"
+    application_id = "com.github.malothebault.template"
+    application_name = "Template"
+    application_description = _('An app template for elemenary os')
     application_version ="0.1"
     app_years = "2021"
-    main_url = "https://github.com/malothebault/escapade"
-    bug_url = "https://github.com/malothebault/escapade/issues/labels/bug"
-    help_url = "https://github.com/malothebault/escapade/issues"
-    translate_url = "https://github.com/malothebault/escapade/issues/labels/translation"
+    main_url = "https://github.com/malothebault/Template"
+    bug_url = "https://github.com/malothebault/Template/issues/labels/bug"
+    help_url = "https://github.com/malothebault/Template/issues"
+    translate_url = "https://github.com/malothebault/Template/issues/labels/translation"
     about_comments = application_description
     about_license_type = Gtk.License.GPL_3_0
 

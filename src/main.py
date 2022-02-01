@@ -30,16 +30,16 @@ class Application(Gtk.Application):
         launch_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
 
         if launch_dir == "/usr/bin":
-            modules_path = "/usr/share/com.github.malothebault.escapade/escapade"
+            modules_path = "/usr/share/com.github.malothebault.template/template"
         else:
-            modules_path = "/app/bin/escapade"
+            modules_path = "/app/bin/template"
 
         # screen = Gdk.Screen.get_default()
         # provider = Gtk.CssProvider()
         # provider.load_from_path(modules_path + "/style.css")
         # Gtk.StyleContext.add_provider_for_screen(screen, provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
                 
-        self.settings = Gio.Settings(schema_id="com.github.malothebault.escapade")
+        self.settings = Gio.Settings(schema_id="com.github.malothebault.template")
         self.win.move(self.settings.get_int("pos-x"), self.settings.get_int("pos-y"))
         self.win.resize(self.settings.get_int("window-width"), self.settings.get_int("window-height"))
         self.win.show_all()

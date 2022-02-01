@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Escapade
+GenericName=Template
+Comment=An app template for elemenary os
+Categories=Accessories;
+Exec=com.github.malothebault.template
+Icon=com.github.malothebault.template
+Terminal=false
+Type=Application
+X-GNOME-Gettext-Domain=com.github.malothebault.template
+Keywords=Python;

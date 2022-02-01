@@ -6,16 +6,11 @@ import webbrowser
 gi.require_version('Gtk', '3.0')
 gi.require_version('Granite', '1.0')
 from gi.repository import Gtk, Gdk, Granite
-try:
-    import constants as cn
-    import welcome as wl
-    import initialisation as it
-    import brackets as bk
-except ImportError:
-    import escapade.constants as cn
-    import escapade.welcome as wl
-    import escapade.initialisation as it
-    import escapade.brackets as bk
+
+import constants as cn
+import welcome as wl
+import page_one
+import page_two
 
 class Stack(Gtk.Box):
         
@@ -33,11 +28,11 @@ class Stack(Gtk.Box):
         self.stack.set_transition_duration(250)
         
         self.welcome = wl.Welcome(self)
-        self.initialisation = it.Initialisation(self)
-        self.brackets = bk.Brackets(self)
+        self.page_one = page_one.PageOneClass(self)
+        self.page_two = page_two.PageTwoClass(self)
 
         self.stack.add_titled(self.welcome, "welcome", "Welcome")
-        self.stack.add_titled(self.initialisation, "initialisation", "Initialisation")
-        self.stack.add_titled(self.brackets, "brackets", "Brackets")
+        self.stack.add_titled(self.page_one, "page_one", "Page One")
+        self.stack.add_titled(self.page_two, "page_two", "Page Two")
 
         self.pack_start(self.stack, True, True, 0)

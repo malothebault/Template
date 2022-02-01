@@ -66,20 +66,20 @@ class Welcome(Gtk.Box):
         '''Here we are creating a new Welcome Widget from the Granite library'''
         welcome = Granite.WidgetsWelcome()
         welcome = welcome.new(
-            _("Welcome"),
+            _("Welcome on Template"),
             cn.App.application_description
         )
 
         '''Let's populate the Welcome menu actions.'''
         welcome.append(
             "document-open", # the action icon (a valid icon name)
-            _('Open a .gpx file'), # the action name
-            _('Visualize the metrics of your adventure') # the action description
+            _('Open a file'), # the action name
+            _('Open a file using the native file chooser') # the action description
         )
         welcome.append(
             "document-new",
-            _('Create a .gpx file'),
-            _('Plan your next adventure !')
+            _('Next view'),
+            _('Go to the next page to begin with the app')
         )
 
         '''Here we are connecting the on_welcome_activated method to the
@@ -105,17 +105,13 @@ class Welcome(Gtk.Box):
                                                _("Open"),
                                                _("Cancel"))
             response = dialog.run()
-            print(response)
             if response == Gtk.ResponseType.ACCEPT:
-                print("Open clicked")
                 print("File selected: " + dialog.get_filename())
                 self.parent.main_file["name"] = dialog.get_filename()[::-1].split("/", 1)[0][::-1]
                 self.parent.main_file["path"] = dialog.get_filename()
-                self.parent.stack.set_visible_child_name("initialisation")
+                self.parent.stack.set_visible_child_name("page_one")
             dialog.destroy() 
-            #self.main_file_selection
-            #self.parent.stack.set_visible_child_name("initialisation")
         else:
             # Open Recent
-            self.parent.stack.set_visible_child_name("brackets")
+            self.parent.stack.set_visible_child_name("page_two")
          

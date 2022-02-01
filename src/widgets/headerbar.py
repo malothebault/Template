@@ -25,6 +25,11 @@ import locale
 import gettext
 import constants as cn
 
+gi.require_version('Gtk', '3.0')
+from gi.repository import Gtk, Gdk
+
+import constants as cn
+
 ########### TRANSLATION ##############
 try:
     current_locale, encoding = locale.getdefaultlocale()
@@ -43,12 +48,6 @@ try:
 except FileNotFoundError:
     _ = str
 ######################################
-
-gi.require_version('Gtk', '3.0')
-
-from gi.repository import Gtk, Gdk
-
-import constants as cn
 
 class Headerbar(Gtk.HeaderBar):
 
@@ -105,15 +104,15 @@ class Headerbar(Gtk.HeaderBar):
             self.hbar_save_file
         )
         
-        '''Another button, this can be used for choosing Application colors'''
-        # self.hbar_color = Gtk.ColorButton.new_with_rgba(
-        #     Gdk.RGBA(222, 222, 222, 255)
-        # )
-        # self.hbar_color.connect(
-        #     "color_set", 
-        #     self.on_hbar_color_color_set
-        # )
-        # self.pack_end(self.hbar_color)
+        '''COLOR BUTTON'''
+        self.hbar_color = Gtk.ColorButton.new_with_rgba(
+            Gdk.RGBA(222, 222, 222, 255)
+        )
+        self.hbar_color.connect(
+            "color_set", 
+            self.on_hbar_color_color_set
+        )
+        self.pack_end(self.hbar_color)
         
         '''THEME BUTTON'''
         self.hbar_theme = Gtk.ToolButton()
@@ -126,7 +125,7 @@ class Headerbar(Gtk.HeaderBar):
 
     '''ACTIONS'''
     def on_hbar_new_file_clicked(self, widget):
-        self.parent.stack.set_visible_child_name("initialisation")
+        self.parent.stack.stack.set_visible_child_name("page_one")
         
     def on_hbar_open_file_clicked(self, widget):
         dialog = Gtk.FileChooserNative.new("Please choose a file",
@@ -135,35 +134,32 @@ class Headerbar(Gtk.HeaderBar):
                                             "Open",
                                             "Cancel")
         response = dialog.run()
-        print(response)
         if response == Gtk.ResponseType.ACCEPT:
-            print("Open clicked")
             print("File selected: " + dialog.get_filename())
             self.parent.main_file["name"] = dialog.get_filename()[::-1].split("/", 1)[0][::-1]
             self.parent.main_file["path"] = dialog.get_filename()
-            self.parent.stack.set_visible_child_name("initialisation")
+            self.parent.stack.stack.set_visible_child_name("page_two")
         dialog.destroy() 
     
     def on_hbar_save_file_clicked(self, widget):
         None
 
-    # def on_hbar_color_color_set(self, widget):
-    #     print("Hi")
-    #     cn.Colors.primary_color = widget.get_rgba().to_string()
+    def on_hbar_color_color_set(self, widget):
+        cn.Colors.primary_color = widget.get_rgba().to_string()
 
-    #     stylesheet = f"""
-    #         @define-color colorPrimary {cn.Colors.primary_color};
-    #         @define-color textColorPrimary {cn.Colors.primary_text_color};
-    #         @define-color textColorPrimaryShadow {cn.Colors.primary_text_shadow_color};
-    #     """
+        stylesheet = f"""
+            @define-color colorPrimary {cn.Colors.primary_color};
+            @define-color textColorPrimary {cn.Colors.primary_text_color};
+            @define-color textColorPrimaryShadow {cn.Colors.primary_text_shadow_color};
+        """
 
-    #     style_provider = Gtk.CssProvider()
-    #     style_provider.load_from_data(bytes(stylesheet.encode()))
-    #     Gtk.StyleContext.add_provider_for_screen(
-    #         Gdk.Screen.get_default(), 
-    #         style_provider,
-    #         Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
-    #     )
+        style_provider = Gtk.CssProvider()
+        style_provider.load_from_data(bytes(stylesheet.encode()))
+        Gtk.StyleContext.add_provider_for_screen(
+            Gdk.Screen.get_default(), 
+            style_provider,
+            Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
+        )
     
     def on_hbar_theme_switcher(self, widget):
         theme = self.settings.get_property(
