@@ -1,6 +1,6 @@
 # Template
-An app template for elemenary os in python. 
 
+An app template for elemenary os in python. 
 This is highly inspired by [ElementaryPython](https://github.com/mirkobrombin/ElementaryPython).
 
 ![Screenshot](https://github.com/malothebault/Template/blob/main/data/assets/screenshot.png)
