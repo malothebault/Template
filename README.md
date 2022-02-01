@@ -11,7 +11,7 @@ This is highly inspired by [ElementaryPython](https://github.com/mirkobrombin/El
 - libgranite-dev 
 
 ## 🔧 Installation
-On the top right corner of this page, click on the 'Use this template' button, then:
+On the top right corner of this page, click on the 'Use this template' green button, then:
 ```bash
 git clone https://github.com/<your_username>/<repo_name>.git
 cd <repo_name>
