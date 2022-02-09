@@ -29,16 +29,13 @@ if launch_dir == "/usr/bin":
 else:
     modules_path = launch_dir + "/template"
 
-# modules_path = "/usr/share/com.github.malothebault.template/template"
-
 sys.path.insert(0, modules_path)
 
-import src.main
-# try:
-#     import src.main
-# except ImportError:
-#     print("Failed to import module main.py!")
-#     print("Installation was assumed to be at:", modules_path)
-#     sys.exit(1)
+try:
+    import src.main
+except ImportError:
+    print("Failed to import module main.py!")
+    print("Installation was assumed to be at:", modules_path)
+    sys.exit(1)
 
 src.main.start()

@@ -49,6 +49,7 @@ try:
     _ = translate.gettext
 except FileNotFoundError:
     _ = str
+######################################
 
 class Welcome(Gtk.Box):
 
@@ -61,7 +62,6 @@ class Welcome(Gtk.Box):
         Gtk.Box.__init__(self, False, 0)
         self.parent = parent
         self._ = _
-        ######################################
 
         '''Here we are creating a new Welcome Widget from the Granite library'''
         welcome = Granite.WidgetsWelcome()

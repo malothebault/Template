@@ -34,6 +34,7 @@ class Application(Gtk.Application):
         else:
             modules_path = "/app/bin/template"
 
+        # # Uncomment to add css style
         # screen = Gdk.Screen.get_default()
         # provider = Gtk.CssProvider()
         # provider.load_from_path(modules_path + "/style.css")
