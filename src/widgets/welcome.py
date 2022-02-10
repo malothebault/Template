@@ -98,7 +98,6 @@ class Welcome(Gtk.Box):
         will use this to perform different actions'''
         self.parent.parent.hbar.hbar_save_file.set_sensitive(True)
         if index == 0:
-            # New Tournament
             dialog = Gtk.FileChooserNative.new(_("Please choose a file"),
                                                self.parent.parent,
                                                Gtk.FileChooserAction.OPEN,
