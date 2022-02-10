@@ -13,14 +13,21 @@ This is highly inspired by [ElementaryPython](https://github.com/mirkobrombin/El
 ## 🔧 Installation
 On the top right corner of this page, click on the 'Use this template' green button, then:
 ```bash
-git clone https://github.com/<your_username>/<repo_name>.git
-cd <repo_name>
+git clone https://github.com/<your_username>/<project_name>.git
+cd <project_name>
+./init.sh
+```
+This little script will ask you the project name and your username and will rename the files
+accordingly.
+
+Then you can install with:
+```bash
 sudo python3 setup.py install
 ```
 
 ## 🔧 How to run
 ```bash
-com.github.<your_username>.template
+com.github.<your_username>.<project_name>
 ```
 
 ## 🔧 If the schema is not found
