@@ -15,6 +15,7 @@ On the top right corner of this page, click on the 'Use this template' green but
 ```bash
 git clone https://github.com/<your_username>/<project_name>.git
 cd <project_name>
+chmod +x init.sh
 ./init.sh
 ```
 This little script will ask you the project name and your username and will rename the files
